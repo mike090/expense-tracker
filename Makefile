@@ -10,4 +10,9 @@ lint:
 autocorrect:
 	bundle exec rubocop -A
 
-check: lint
+check: lint test
+
+test:
+	bundle exec rspec
+
+.PONEY:	test
