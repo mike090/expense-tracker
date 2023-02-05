@@ -15,3 +15,7 @@ group :test do
   gem 'rack-test', '~> 2.0.2'
   gem 'rspec', '~> 3.12.0'
 end
+
+group :development, :test do
+  gem 'byebug'
+end
