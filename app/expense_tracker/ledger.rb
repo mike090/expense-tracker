@@ -2,10 +2,17 @@
 
 module ExpenseTracker
   RecordResult = Struct.new(:success?, :expense_id, :error_message)
-  ByDateResult = Struct.new(:expenses)
 
   class Ledger
-    def record(expense); end
-    def by_date(date); end
+    def record(expense)
+      id = DB[:expenses].insert(expense)
+      RecordResult.new(true, id, nil)
+    rescue StandardError => e
+      RecordResult.new(false, nil, e.message)
+    end
+
+    def expenses_on(date)
+      DB[:expenses].where(date:).all
+    end
   end
 end

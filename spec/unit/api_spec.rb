@@ -37,6 +37,7 @@ module ExpenseTracker
             .with(expense)
             .and_return(RecordResult.new(false, nil, 'Expense incomplete'))
         end
+
         it 'returns an error message' do
           post '/expenses', JSON.generate(expense)
           parsed = JSON.parse(last_response.body)
@@ -60,8 +61,8 @@ module ExpenseTracker
         end
 
         before do
-          allow(ledger_stub).to receive(:by_date)
-            .and_return(ByDateResult.new(expenses))
+          allow(ledger_stub).to receive(:expenses_on)
+            .and_return(expenses)
         end
 
         it 'returns the expense records as JSON' do
@@ -78,8 +79,8 @@ module ExpenseTracker
 
       context 'when there are no expenses on the given date' do
         before do
-          allow(ledger_stub).to receive(:by_date)
-            .and_return(ByDateResult.new([]))
+          allow(ledger_stub).to receive(:expenses_on)
+            .and_return([])
         end
 
         it 'returns an empty array as JSON' do

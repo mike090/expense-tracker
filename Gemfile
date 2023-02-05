@@ -3,7 +3,9 @@
 source 'https://rubygems.org'
 
 gem 'puma', '~> 6.0.2'
+gem 'sequel', '~> 5.65.0'
 gem 'sinatra', '~> 3.0.5'
+gem 'sqlite3', '~> 1.6.0'
 
 group :development do
   gem 'rubocop', '~> 1.44.1'
